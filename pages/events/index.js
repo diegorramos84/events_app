@@ -1,23 +1,13 @@
+import AllEvents from '@/src/components/events/events-page'
 import React from 'react'
-import Image from 'next/image'
+
 
 function EventsPage({ data }) {
 
   return (
-    <div>
-      <h1>Events Page</h1>
-      <div>
-        {data.map(ev => (
-            <a key={ev.id} href={`/events/${ev.id}`}>
-              <Image width={200} height={200}src={ev.image} alt={ev.id}/>
-              <h2>{ev.title}</h2>
-            </a>
-          ))}
-      </div>
-    </div>
+    <AllEvents data={ data }/>
   )
 }
-
 
 export default EventsPage
 

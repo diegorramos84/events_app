@@ -1,6 +1,5 @@
-import Link from 'next/link'
 import React from 'react'
-import Image from 'next/image'
+import CategoryEvent from '@/src/components/events/categoryEvent'
 
 export async function getStaticPaths() {
   const { events_categories } = await import('/data/data.json')
@@ -30,18 +29,7 @@ export async function getStaticProps(context) {
 
 function EventsPerCatPage({ data, pageName }) {
   return(
-    <div>
-      <div>
-        <h1>Events in {pageName}</h1>
-        {data.map(ev => (
-          <Link key ={ev.id} href={`/events/${ev.city}/${ev.id}`}>
-            <Image src={ev.image} alt={ev.id} width={200} height={200}/>
-            <h2>{ev.title}</h2>
-            <p>{ev.description}</p>
-          </Link>
-        ))}
-      </div>
-    </div>
+    <CategoryEvent data={data} pageName={pageName}/>
   )
 }
 
