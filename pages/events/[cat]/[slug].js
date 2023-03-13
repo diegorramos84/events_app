@@ -1,5 +1,5 @@
 import React from 'react'
-import EventCard from '@/src/components/events/eventCard'
+import SingleEvent from '@/src/components/events/single-event'
 
 export async function getStaticPaths() {
   const { allEvents } = await import('/data/data.json')
@@ -30,7 +30,7 @@ export async function getStaticProps(context) {
 
 function EventPage({ data }) {
   return (
-    <EventCard data={data}/>
+    <SingleEvent data={data}/>
   )
 }
 
