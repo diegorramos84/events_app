@@ -14,15 +14,17 @@ function extractData(filePath) {
 export default function handler (req, res) {
   const {method} = req
   const filePath = buildPath()
-  const { event_categories, allEvents } = extractData(filePath)
+  const { events_categories, allEvents } = extractData(filePath)
 
   if(!allEvents) { return res.status(404).json({ message: 'Events data not found'})}
 
   if(method === "POST") {
     const {email, eventId} = req.body
+
     if (!email | !email.includes('@')) {
       res.status(422).json({ message: 'invalid email address' })
     }
+
     const newAllEvents = allEvents.map(ev => {
       if(ev.id === eventId) {
         if(ev.emails_registered.includes(email)) {
@@ -36,7 +38,7 @@ export default function handler (req, res) {
       return ev
     })
 
-    fs.writeFileSync(filePath, JSON.stringify({event_categories, allEvents: newAllEvents}))
+    fs.writeFileSync(filePath, JSON.stringify({ events_categories, allEvents: newAllEvents }))
 
 
     res.status(200).json({ message: `You have been registred with the email: ${email} to the event: ${eventId}`})

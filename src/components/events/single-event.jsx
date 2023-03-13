@@ -24,13 +24,13 @@ function SingleEvent({ data }) {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: emailValue, eventId: eventId})
+        body: JSON.stringify({ email: emailValue, eventId: eventId })
       })
 
       if(!response.ok) throw new Error(`Error: ${response.status}`)
 
-      const data = await response.json()
-      setMessage(data.message)
+      const eventData = await response.json()
+      setMessage(eventData.message)
       inputEmail.current.value = ''
 
     } catch (error) {
